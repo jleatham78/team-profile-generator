@@ -4,6 +4,7 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const fs = require('fs');
 const path = require('path');
+const generatePage = require('./src/page-template.js');
 
 const teamMembers = [];
 const id = [];
@@ -48,15 +49,15 @@ function startApp() {
                 type: 'list',
                 name: 'menu',
                 message: "What would you like to do?",
-                choices: ['Engineer', 'Intern', 'Finish building my team']
+                choices: ['Add Engineer', 'Add Intern', 'Finish building my team']
             }])
             .then(answers => {
-                if (answers.menu === 'Engineer') {
+                if (answers.menu === 'Add Engineer') {
                     addEngineer()
-                } else if (answers.menu === 'Intern') {
+                } else if (answers.menu === 'Add Intern') {
                     addIntern()
                 } else {
-                    //build team function
+                    buildTeam()
                 }
         
             })
@@ -129,8 +130,13 @@ function startApp() {
     };
 
     function buildTeam() {
-        require fr;
-        require path;
+        //require fr;
+        //require path;
+        fs.writeFile('index.html', generatePage(teamMembers), err => {
+            if (err) throw err;
+          
+            console.log('Team complete! Check out index.html to see the output!');
+          });
 
     }
 

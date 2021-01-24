@@ -1,0 +1,93 @@
+const teamMembers = []
+
+const intern = teamMembers.filter(teamMembers => teamMembers.getRole() === "Intern")
+const engineer = teamMembers.filter(teamMembers => teamMembers.getRole() === "Engineer")
+const manager = teamMembers.filter(teamMembers => teamMembers.getRole() === "Manager")
+
+const internHtml = intern.map(intern => renderIntern(intern)).join("");
+const engineerHtml = engineer.map(engineer => renderEngineer(engineer)).join("");
+const managerHtml = manager.map(manager => renderManager(manager)).join("");
+
+function renderManager (manager) {
+    return `
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${manager.name}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
+      <h7 class="card-text">ID: ${manager.id}</h7>
+      <h7 class="card-text">ID: ${manager.office}</h7>
+      <a href="#" class="card-link">${manager.email}</a>
+    </div>
+  </div>`
+    
+}
+
+function renderIntern(intern) {
+    return `
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${intern.name}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
+      <h7 class="card-text">ID: ${intern.id}</h7>
+      <h7 class="card-text">ID: ${intern.school}</h7>
+      <a href="#" class="card-link">${intern.email}</a>
+    </div>
+  </div>`
+}
+
+function renderEngineer(engineer) {
+    return `
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${engineer.name}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
+      <h7 class="card-text">ID: ${engineer.id}</h7>
+      <a href="#" class="card-link"> GitHub: ${engineer.github}</a>
+      <a href="#" class="card-link">${engineer.email}</a>
+    </div>
+  </div>`
+}
+
+
+function generatePage(promptData) {
+    
+    
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+  
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Portfolio Demo</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+      <link rel="stylesheet" href="style.css">
+    </head>
+  
+    <body>
+      <header>
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">My Team</span>
+        </div>
+      </nav>
+      </header>
+
+      <main>
+      <div class="container">
+        <div class="row row-cols-3">
+            <div class="col">${renderManager(manager)}</div>
+            <div class="col">${renderEngineer(engineer)}</div>
+            <div class="col">${renderIntern(intern)}</div>
+           </div>
+        </div>
+  
+      </main>
+      
+    </body>
+    </html>
+    `;
+}
+
+module.exports = generatePage;
