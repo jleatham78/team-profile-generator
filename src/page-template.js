@@ -37,8 +37,8 @@ function renderEngineer(engineer) {
          <h5 class="card-title">${engineer.name}</h5>
         <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
         <h7 class="card-text">ID: ${engineer.id}</h7><br>
-        <a href="https://github.com/" + ${engineer.github} class="card-link" target= "blank"> GitHub: ${engineer.github}</a><br>
-        <a href="#" class="card-link">${engineer.email}</a>
+        <a href="https://github.com/" + ${engineer.github} class="card-link" target= "blank">GitHub: ${engineer.github}</a><br>
+        <a href="mailto:" + ${engineer.email} class="card-link" target = "blank">${engineer.email}</a>
         </div>
     </div>`
 
