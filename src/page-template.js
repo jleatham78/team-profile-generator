@@ -1,56 +1,58 @@
-const teamMembers = []
-
-const intern = teamMembers.filter(teamMembers => teamMembers.getRole() === "Intern")
-const engineer = teamMembers.filter(teamMembers => teamMembers.getRole() === "Engineer")
-const manager = teamMembers.filter(teamMembers => teamMembers.getRole() === "Manager")
-
-const internHtml = intern.map(intern => renderIntern(intern)).join("");
-const engineerHtml = engineer.map(engineer => renderEngineer(engineer)).join("");
-const managerHtml = manager.map(manager => renderManager(manager)).join("");
-
 function renderManager (manager) {
+
     return `
     <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">${manager.name}</h5>
       <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
-      <h7 class="card-text">ID: ${manager.id}</h7>
-      <h7 class="card-text">ID: ${manager.office}</h7>
+      <h7 class="card-text">ID: ${manager.id}</h7><br>
+      <h7 class="card-text">Office: ${manager.officeNumber}</h7><br>
       <a href="#" class="card-link">${manager.email}</a>
     </div>
   </div>`
+
     
 }
 
 function renderIntern(intern) {
-    return `
+    
+    return `  
     <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">${intern.name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
-      <h7 class="card-text">ID: ${intern.id}</h7>
-      <h7 class="card-text">ID: ${intern.school}</h7>
-      <a href="#" class="card-link">${intern.email}</a>
-    </div>
-  </div>`
+        <div class="card-body">
+        <h5 class="card-title">${intern.name}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
+        <h7 class="card-text">ID: ${intern.id}</h7><br>
+        <h7 class="card-text">School: ${intern.school}</h7><br>
+        <a href="#" class="card-link">${intern.email}</a>
+       </div>
+    </div>`
+    
 }
 
 function renderEngineer(engineer) {
+
     return `
     <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">${engineer.name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
-      <h7 class="card-text">ID: ${engineer.id}</h7>
-      <a href="#" class="card-link"> GitHub: ${engineer.github}</a>
-      <a href="#" class="card-link">${engineer.email}</a>
-    </div>
-  </div>`
+        <div class="card-body">
+         <h5 class="card-title">${engineer.name}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
+        <h7 class="card-text">ID: ${engineer.id}</h7><br>
+        <a href="https://github.com/" + ${engineer.github} class="card-link" target= "blank"> GitHub: ${engineer.github}</a><br>
+        <a href="#" class="card-link">${engineer.email}</a>
+        </div>
+    </div>`
+
 }
 
+function generatePage(teamMembers) {
 
-function generatePage(promptData) {
-    
+    const intern = teamMembers.filter(employee => employee.getRole() === "Intern")
+    const engineer = teamMembers.filter(employee => employee.getRole() === "Engineer")
+    const manager = teamMembers.filter(employee => employee.getRole() === "Manager") 
+
+    const internHtml = intern.map((intern) => renderIntern(intern)).join("");
+    const engineerHtml = engineer.map((engineer) => renderEngineer(engineer)).join("");
+    const managerHtml = manager.map((manager) => renderManager(manager)).join("");
     
     return `
     <!DOCTYPE html>
@@ -77,9 +79,10 @@ function generatePage(promptData) {
       <main>
       <div class="container">
         <div class="row row-cols-3">
-            <div class="col">${renderManager(manager)}</div>
-            <div class="col">${renderEngineer(engineer)}</div>
-            <div class="col">${renderIntern(intern)}</div>
+            <div class="col">${managerHtml}</div>
+            <div class="col">${engineerHtml}</div>
+            <div class="col">${internHtml}</div>
+
            </div>
         </div>
   
